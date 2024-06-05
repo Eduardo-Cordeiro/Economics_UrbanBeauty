@@ -5,14 +5,10 @@ from openpyxl import load_workbook
 
 # Abrir pasta xl
 data = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Dados_Vértices.xlsx")
-
 data_parques = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Locais_Históricos.xlsx")
-
 data = data.sort_values(by="NOME")
-
 bairros = list(set(data["NOME"].to_list()))
 bairros.sort()
-
 
 def selectcord_bairro(bairro,df,cord):
 
@@ -38,10 +34,6 @@ def area_calc(x,y):
     A = sum(soma)/2
     return A   
     
-teste = area_calc(selectcord_bairro(bairros[0],data,"x"),selectcord_bairro(bairros[0],data,"y"))
-print('#########3')
-print(teste)
-
 def calc_center(x,y,cord):
     nx = len(x)
     soma = []
@@ -87,7 +79,36 @@ def calc_center(x,y,cord):
                 som_y.append(d)
         Cy = (sum(som_y))/(6*a)
         return Cy    
-        
+
+def dist(x1,y1,x2,y2):
+    r = 6371
+    phi1 = np.radians(y2)
+    phi2 = np.radians(y1)
+    delta_phi = np.radians(y2 - y1)
+    delta_lambda = np.radians(x2 - x1)
+    a = np.sin(delta_phi / 2) ** 2 + np.cos(phi1) * np.cos(phi2) * np.sin(delta_lambda / 2) ** 2
+    res = r * (2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a)))
+    return np.round(res, 2)        
+
+def gravitacional(bairro,bairros,data_centro,data_parque):
+    index = bairros.index(str(bairro))
+    n = len(data_parque["Long"])
+
+    lista_distancias = []
+    sqrinv = []
+    x = data_centro["LAT_CENTRO"][index]
+    y = data_centro["LONG_CENTRO"][index]
+    
+    for i in range(0,n,1):
+        a = dist(x,y,data_parque["Long"].tolist()[i],data_parque["Lat"].tolist()[i])
+        lista_distancias.append(a)
+    for i in lista_distancias:
+        b = 1/(i**2)
+        sqrinv.append(b)
+    c = sum(sqrinv)
+    return c
+
+
 lat_centro = []
 long_centro = []
 for i in bairros:
@@ -98,6 +119,9 @@ data_tratada = pd.DataFrame()
 data_tratada["BAIRROS"] = bairros
 data_tratada["LAT_CENTRO"] = lat_centro
 data_tratada["LONG_CENTRO"] = long_centro
+
+
+
 
 
 
