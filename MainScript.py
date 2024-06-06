@@ -14,9 +14,13 @@ def selectcord_bairro(bairro,df,cord):
 
     df_filtered = df[df["NOME"] == bairro]
     if cord == "x":
-        return df_filtered["Lat"].tolist()
+        A = df_filtered.sort_values(by="INDEX")
+        B = A["Lat"].tolist()
+        return B
     elif cord == "y":
-        return df_filtered["Long"].tolist()
+        A = df_filtered.sort_values(by="INDEX")
+        B = A["Long"].tolist()
+        return B
 
 def area_calc(x,y):
     nx = len(x)
@@ -108,17 +112,45 @@ def gravitacional(bairro,bairros,data_centro,data_parque):
     c = sum(sqrinv)
     return c
 
+def media(bairro,bairros,data_centro,data_parque):
+    index = bairros.index(str(bairro))
+    n = len(data_parque["Long"])
 
+    lista_distancias = []
+    sqrinv = []
+    x = data_centro["LAT_CENTRO"][index]
+    y = data_centro["LONG_CENTRO"][index]
+    
+    for i in range(0,n,1):
+        a = dist(x,y,data_parque["Long"].tolist()[i],data_parque["Lat"].tolist()[i])
+        lista_distancias.append(a)
+    return sum(lista_distancias)/n
+
+
+
+area_bairro = []
 lat_centro = []
 long_centro = []
+
+
+
 for i in bairros:
+    area_bairro.append(area_calc(selectcord_bairro(i,data,"x"),selectcord_bairro(i,data,"y")))
     lat_centro.append(calc_center(selectcord_bairro(i,data,"x"),selectcord_bairro(i,data,"y"),'x'))
     long_centro.append(calc_center(selectcord_bairro(i,data,"x"),selectcord_bairro(i,data,"y"),'y'))
+
     
-data_tratada = pd.DataFrame()
-data_tratada["BAIRROS"] = bairros
-data_tratada["LAT_CENTRO"] = lat_centro
-data_tratada["LONG_CENTRO"] = long_centro
+data_bairros = pd.DataFrame()
+data_bairros["BAIRROS"] = bairros
+data_bairros["AREA"] = area_bairro
+data_bairros["LAT_CENTRO"] = lat_centro
+data_bairros["LONG_CENTRO"] = long_centro
+
+indicegravitacional = []
+lenght = len(bairros)
+for i in range(0,lenght,1):
+    indice = gravitacional(bairros[i],bairros,data_bairros,data_parques)
+    indicegravitacional.append(indice)
 
 
 
