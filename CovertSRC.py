@@ -1,4 +1,4 @@
-#convertendo SRC de 3875 para 4326
+#Converting SRC from ESPG:3875 to ESPG:4326
 import pyproj
 import pandas as pd
 
@@ -26,4 +26,4 @@ data["Long_Conv"] = longs
 
 print(data)
 
-data.to_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Macro_Convert_Vertex.xlsx")
+data.to_excel("C:\\Data\\Macro_Convert_Vertex.xlsx")
