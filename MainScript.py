@@ -3,21 +3,23 @@ import numpy as np
 from openpyxl import load_workbook
 
 
-# Abrir pasta xl
-data = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Dados_Vértices.xlsx")
-data_hist = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Locais_Históricos.xlsx")
-data = data.sort_values(by="NOME")
-bairros = list(set(data["NOME"].to_list()))
-bairros.sort()
+# Open xl file
+data = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Neighborhood_Vertices.xlsx")
+data_hist = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Historical_Sites.xlsx")
+data = data.sort_values(by="Name")
+neighborhoods = list(set(data["Name"].to_list()))
+neighborhoods.sort()
 
-def selectcord_bairro(bairro,df,cord):
-    df_filtered = df[df["NOME"] == bairro]
+# Select all latitude or longitude coordinates of a specific subdivison
+def selectcord_neighborhood(neighborhood,df,cord):
+    df_filtered = df[df["Name"] == neighborhood]
     A = df_filtered.sort_values(by="INDEX")
     if cord == "x":
         return A["Long"].tolist()
     elif cord == "y":
         return A["Lat"].tolist()
 
+# Calculates the area of a subdivision
 def area_calc(x,y):
     nx = len(x)
     soma = []
@@ -31,7 +33,8 @@ def area_calc(x,y):
             s = (x[count]*y[count+1]) - (x[count+1]*y[count])
             soma.append(s)
     return sum(soma)/2   
-    
+
+# Calculates the center of a subdivision    
 def calc_center(x,y,cord):
     nx = len(x)
     soma = []
@@ -78,6 +81,7 @@ def calc_center(x,y,cord):
         Cy = (sum(som_y))/(6*a)
         return Cy    
 
+# Distance beetween tow points
 def dist(x1,y1,x2,y2):
     r = 6371
     phi1 = np.radians(y2)
@@ -88,54 +92,63 @@ def dist(x1,y1,x2,y2):
     res = r * (2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a)))
     return np.round(res, 2)        
 
-def gravitacional(bairro,bairros,data_centro,data_parque):
-    index = bairros.index(str(bairro))
-    lista_distancias = []
+# Gravitacional index
+def gravit(bairro,neighborhoods,data_center,data_park):
+    index = neighborhoods.index(str(bairro))
+    lista_dists = []
     sqrinv = []
-    x = data_centro["LONG_CENTER"][index]
-    y = data_centro["LAT_CENTER"][index]
-    for i in range(0,len(data_parque["Long"]),1):
-        a = dist(x,y,data_parque["Long"].tolist()[i],data_parque["Lat"].tolist()[i])
-        lista_distancias.append(a)
-    for i in lista_distancias:
+    x = data_center["LONG_CENTER"][index]
+    y = data_center["LAT_CENTER"][index]
+    for i in range(0,len(data_park["Long"]),1):
+        a = dist(x,y,data_park["Long"].tolist()[i],data_park["Lat"].tolist()[i])
+        lista_dists.append(a)
+    for i in lista_dists:
         b = 1/(i**2)
         sqrinv.append(b)
     return sum(sqrinv)
 
-def media(bairro,bairros,data_centro,data_parque):
-    index = bairros.index(str(bairro))
-    n = len(data_parque["Long"])
+# Average distance of a center in relationsship to all parks of the city
+def media(neighborhood,neighborhoods,data_center,data_park):
+    index = neighborhoods.index(str(neighborhood))
+    n = len(data_park["Long"])
 
-    lista_distancias = []
+    lista_dists = []
     sqrinv = []
-    x = data_centro["LAT_CENTRO"][index]
-    y = data_centro["LONG_CENTRO"][index]
+    x = data_center["LAT_CENTRO"][index]
+    y = data_center["LONG_CENTRO"][index]
     
     for i in range(0,n,1):
-        a = dist(x,y,data_parque["Long"].tolist()[i],data_parque["Lat"].tolist()[i])
-        lista_distancias.append(a)
-    return sum(lista_distancias)/n
+        a = dist(x,y,data_park["Long"].tolist()[i],data_park["Lat"].tolist()[i])
+        lista_dists.append(a)
+    return sum(lista_dists)/n
 
 
-area_bairro = []
-lat_centro = []
-long_centro = []
-for i in bairros:
-    area_bairro.append(area_calc(selectcord_bairro(i,data,"x"),selectcord_bairro(i,data,"y")))
-    lat_centro.append(calc_center(selectcord_bairro(i,data,"x"),selectcord_bairro(i,data,"y"),'y'))
-    long_centro.append(calc_center(selectcord_bairro(i,data,"x"),selectcord_bairro(i,data,"y"),'x'))
-    
+area_neighborhood = []
+long_center = []
+lat_center = []
+for i in neighborhoods:
+    area_neighborhood.append(area_calc(selectcord_neighborhood(i,data,"x"),selectcord_neighborhood(i,data,"y")))
+    long_center.append(calc_center(selectcord_neighborhood(i,data,"x"),selectcord_neighborhood(i,data,"y"),'x'))
+    lat_center.append(calc_center(selectcord_neighborhood(i,data,"x"),selectcord_neighborhood(i,data,"y"),'y'))
+
 data_neighbors = pd.DataFrame()
-data_neighbors["NEIGHBORHOOD"] = bairros
-data_neighbors["AREA"] = area_bairro
-data_neighbors["LAT_CENTER"] = lat_centro
-data_neighbors["LONG_CENTER"] = long_centro
+data_neighbors["NEIGHBORHOOD"] = neighborhoods
+data_neighbors["AREA"] = area_neighborhood
+data_neighbors["LAT_CENTER"] = lat_center
+data_neighbors["LONG_CENTER"] = long_center
 
-indicegravitacional = []
-lenght = len(bairros)
+gi = []
+lenght = len(neighborhoods)
 for i in range(0,lenght,1):
-    indice = gravitacional(bairros[i],bairros,data_neighbors,data_hist)
-    indicegravitacional.append(indice)
+    index = gravit(neighborhoods[i],neighborhoods,data_neighbors,data_hist)
+    gi.append(index)
+    
+
+
+
+
+
+
     
 
 
