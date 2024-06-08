@@ -6,27 +6,28 @@ The idea is to assign *weights* to each neighborhood in a city based on the amou
 
 It is expected that neighborhoods with a higher *weight* will have higher average housing prices and higher average wages.
 
-To accomplish this, the following steps need to be followed:
+To accomplish this, the steps bellow must be followed:
 
 ## Step 1 - Obtaining Centers
 
-We can use the geometric center of a city subdivison or the populacional center. In this project, we'll use both and copmpare wich one have the best results.
+We can use the geometric center or the populacional center. In this project, we'll use both and comppare wich one have the best results.
   
-  ### Step1.1
+  #### Geometric Center
+
+  #### Populacional Center
 
 ## Step 2 - Obtaining coordinates of historical and recreational sites
 
 ## Step 3 - Compute the Gravitacional Index
 
 $$
-F = G \frac{m_1 m_2}{r^2}
+GI = \sum_{i=1}^{n} \frac{1}{d^2_i}
 $$
 
 where:
-- \( F \) is the gravitational force,
-- \( G \) is the gravitational constant,
-- \( m_1 \) and \( m_2 \) are the masses,
-- \( r \) is the distance between the centers of the two masses.
+- \( GI \) is the gravitational index,
+- \( d \) is the distance beetween the center and the specific attraction
+
 
 ## Step 4 - Review Data
 
