@@ -5,38 +5,32 @@ from openpyxl import load_workbook
 
 # Abrir pasta xl
 data = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Dados_Vértices.xlsx")
-data_parques = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Locais_Históricos.xlsx")
+data_hist = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Locais_Históricos.xlsx")
 data = data.sort_values(by="NOME")
 bairros = list(set(data["NOME"].to_list()))
 bairros.sort()
 
 def selectcord_bairro(bairro,df,cord):
-
     df_filtered = df[df["NOME"] == bairro]
+    A = df_filtered.sort_values(by="INDEX")
     if cord == "x":
-        A = df_filtered.sort_values(by="INDEX")
-        B = A["Lat"].tolist()
-        return B
+        return A["Long"].tolist()
     elif cord == "y":
-        A = df_filtered.sort_values(by="INDEX")
-        B = A["Long"].tolist()
-        return B
+        return A["Lat"].tolist()
 
 def area_calc(x,y):
     nx = len(x)
     soma = []
     count = -1
     for i in x:
-        count = count + 1
-
+        count += 1
         if int(count) == (int(nx) - 1):
             s = (x[count]*y[count-nx+1]) - (x[count-nx+1]*y[count])
             soma.append(s)
         elif int(count) < (int(nx) - 1):
             s = (x[count]*y[count+1]) - (x[count+1]*y[count])
             soma.append(s)
-    A = sum(soma)/2
-    return A   
+    return sum(soma)/2   
     
 def calc_center(x,y,cord):
     nx = len(x)
@@ -96,21 +90,17 @@ def dist(x1,y1,x2,y2):
 
 def gravitacional(bairro,bairros,data_centro,data_parque):
     index = bairros.index(str(bairro))
-    n = len(data_parque["Long"])
-
     lista_distancias = []
     sqrinv = []
-    x = data_centro["LAT_CENTRO"][index]
-    y = data_centro["LONG_CENTRO"][index]
-    
-    for i in range(0,n,1):
+    x = data_centro["LONG_CENTER"][index]
+    y = data_centro["LAT_CENTER"][index]
+    for i in range(0,len(data_parque["Long"]),1):
         a = dist(x,y,data_parque["Long"].tolist()[i],data_parque["Lat"].tolist()[i])
         lista_distancias.append(a)
     for i in lista_distancias:
         b = 1/(i**2)
         sqrinv.append(b)
-    c = sum(sqrinv)
-    return c
+    return sum(sqrinv)
 
 def media(bairro,bairros,data_centro,data_parque):
     index = bairros.index(str(bairro))
@@ -127,30 +117,32 @@ def media(bairro,bairros,data_centro,data_parque):
     return sum(lista_distancias)/n
 
 
-
 area_bairro = []
 lat_centro = []
 long_centro = []
-
-
-
 for i in bairros:
     area_bairro.append(area_calc(selectcord_bairro(i,data,"x"),selectcord_bairro(i,data,"y")))
-    lat_centro.append(calc_center(selectcord_bairro(i,data,"x"),selectcord_bairro(i,data,"y"),'x'))
-    long_centro.append(calc_center(selectcord_bairro(i,data,"x"),selectcord_bairro(i,data,"y"),'y'))
-
+    lat_centro.append(calc_center(selectcord_bairro(i,data,"x"),selectcord_bairro(i,data,"y"),'y'))
+    long_centro.append(calc_center(selectcord_bairro(i,data,"x"),selectcord_bairro(i,data,"y"),'x'))
     
-data_bairros = pd.DataFrame()
-data_bairros["BAIRROS"] = bairros
-data_bairros["AREA"] = area_bairro
-data_bairros["LAT_CENTRO"] = lat_centro
-data_bairros["LONG_CENTRO"] = long_centro
+data_neighbors = pd.DataFrame()
+data_neighbors["NEIGHBORHOOD"] = bairros
+data_neighbors["AREA"] = area_bairro
+data_neighbors["LAT_CENTER"] = lat_centro
+data_neighbors["LONG_CENTER"] = long_centro
 
 indicegravitacional = []
 lenght = len(bairros)
 for i in range(0,lenght,1):
-    indice = gravitacional(bairros[i],bairros,data_bairros,data_parques)
+    indice = gravitacional(bairros[i],bairros,data_neighbors,data_hist)
     indicegravitacional.append(indice)
+    
+
+
+
+
+
+
 
 
 
