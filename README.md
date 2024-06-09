@@ -45,7 +45,7 @@ The data for populacional density was taken from 2020 NASA GPW on [https://sedac
 ## Step 2 - Obtaining coordinates of Scenic Locations 
 
 In this work, the following urban spaces will be defined as Scenic Locations:
-Parks, Museums, Memorials, and Historical-Cultural Heritage sites, as designated by the Porto Alegre City Hall. Parks and squares are considered Recreational Locations, while museums, memorials, and historical-cultural heritage sites are considered Historical Locations. The coordinates were obtained by manually pinning the site on Google Maps.
+Parks, Museums, Memorials, and Historical-Cultural Heritage sites, as designated by the Porto Alegre City Hall. Parks and squares are considered Recreational Locations, while museums, memorials, and historical-cultural heritage sites are considered Historical Locations. The coordinates were obtained by manually pinning the locations on Google Maps.
 
 ## Step 3 - Compute the Gravitacional Index
 
