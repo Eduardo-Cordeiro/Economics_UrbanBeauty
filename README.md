@@ -35,12 +35,16 @@ where:
 - \( x \) is the Longitude of the vertex,
 - \( y \) is the Latitude of the vertex,
 - \( Cx \) is the Longitude of the center,
-- \( Cy \) is the Latitude of the center,
+- \( Cy \) is the Latitude of the center.
   
 
 #### Populacional Center
+The data for populacional density was taken from 2020 NASA GPW on [https://sedac.ciesin.columbia.edu/data/collection/gpw-v4 ] and the center of each Neighborhood and Macrozone was obtained via QGIS and then exported do a .xlsx file.
 
-## Step 2 - Obtaining coordinates of historical and recreational sites
+## Step 2 - Obtaining coordinates of Scenic Locations 
+
+In this work, the following urban spaces will be defined as Scenic Locations:
+Parks, Museums, Memorials, and Historical-Cultural Heritage sites, as designated by the Porto Alegre City Hall. Parks and squares are considered Recreational Locations, while museums, memorials, and historical-cultural heritage sites are considered Historical Locations. The coordinates were obtained by manually pinning the site on Google Maps.
 
 ## Step 3 - Compute the Gravitacional Index
 
@@ -50,8 +54,7 @@ $$
 
 where:
 - \( GI \) is the gravitational index,
-- \( d \) is the distance beetween the center and the specific attraction
-
+- \( d \) is the distance beetween the center and the specific attraction.
 
 ## Step 4 - Review Data
 
