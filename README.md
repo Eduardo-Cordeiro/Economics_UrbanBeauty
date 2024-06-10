@@ -49,6 +49,9 @@ Parks, Museums, Memorials, and Historical-Cultural Heritage sites, as designated
 
 ## Step 3 - Compute the Gravitacional Index
 
+This index was based on Carlino & Saiz paper https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1293550. The index is constructed as bellow:
+
+
 $$
 GI = \sum_{i=1}^{n} \frac{1}{d^2_i}
 $$
