@@ -49,9 +49,10 @@ Parks, Museums, Memorials, and Historical-Cultural Heritage sites, as designated
 
 ## Step 3 - Computing the Gravitacional Index
 
-This index was based on Carlino & Saiz paper https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1293550. The index is constructed as bellow:
+This index was based on Carlino & Saiz paper https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1293550. 
+The index express how much historicity or beauty is near the center of the division selected, higer the value, the more concentrated is the beaty of the division, so it's expected that beautiful neighborhoods have a high index.
 
-
+The index is constructed as bellow:
 $$
 GI = \sum_{i=1}^{n} \frac{1}{d^2_i}
 $$
@@ -60,7 +61,7 @@ where:
 - \( GI \) is the gravitational index,
 - \( d \) is the distance beetween the center and the specific attraction.
 
-To the Score Ponderated Index, we use the expression bellow:
+The index as it is above does not adress the quality of the diferent interest sites (a park can be better than another parl, for example) so we utilized the index below to try to adress this issue.
 
 $$
 GI = \sum_{i=1}^{n} \frac{s_{i}}{d^2_i}
@@ -68,6 +69,8 @@ $$
 
 where:
 - \( s \) is the score of the park i,
+
+ 
 
 ## Step 4 - Review Data
 
