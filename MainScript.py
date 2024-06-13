@@ -1,14 +1,20 @@
 import pandas as pd
 import numpy as np
-from openpyxl import load_workbook
 
 
 # Open xl file
-data = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Neighborhood_Vertices.xlsx")
-data_hist = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Historical_Sites.xlsx")
-data = data.sort_values(by="Name")
-neighborhoods = list(set(data["Name"].to_list()))
+data_neigh = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Neighborhood_Vertices.xlsx")
+data_macro = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Macro_Convert_Vertex.xlsx")
+data_hist = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Historical_Sites.xlsx")
+
+
+data_neigh = data_neigh.sort_values(by="Name")
+neighborhoods = list(set(data_neigh["Name"].to_list()))
 neighborhoods.sort()
+
+data_macro = data_macro.sort_values(by="Name")
+Macrozones = list(set(data_macro["Name"].to_list()))
+Macrozones.sort()
 
 # Select all latitude or longitude coordinates of a specific subdivison
 def selectcord_neighborhood(neighborhood,df,cord):
@@ -126,10 +132,11 @@ def media(neighborhood,neighborhoods,data_center,data_park):
 area_neighborhood = []
 long_center = []
 lat_center = []
+
 for i in neighborhoods:
-    area_neighborhood.append(area_calc(selectcord_neighborhood(i,data,"x"),selectcord_neighborhood(i,data,"y")))
-    long_center.append(calc_center(selectcord_neighborhood(i,data,"x"),selectcord_neighborhood(i,data,"y"),'x'))
-    lat_center.append(calc_center(selectcord_neighborhood(i,data,"x"),selectcord_neighborhood(i,data,"y"),'y'))
+    area_neighborhood.append(area_calc(selectcord_neighborhood(i,data_neigh,"x"),selectcord_neighborhood(i,data_neigh,"y")))
+    long_center.append(calc_center(selectcord_neighborhood(i,data_neigh,"x"),selectcord_neighborhood(i,data_neigh,"y"),'x'))
+    lat_center.append(calc_center(selectcord_neighborhood(i,data_neigh,"x"),selectcord_neighborhood(i,data_neigh,"y"),'y'))
 
 data_neighbors = pd.DataFrame()
 data_neighbors["NEIGHBORHOOD"] = neighborhoods
@@ -143,6 +150,45 @@ for i in range(0,lenght,1):
     index = gravit(neighborhoods[i],neighborhoods,data_neighbors,data_hist)
     gi.append(index)
     
+area_macrozone = []
+long_center = []
+lat_center = []
+
+for i in Macrozones:
+    area_macrozone.append(area_calc(selectcord_neighborhood(i,data_macro,"x"),selectcord_neighborhood(i,data_macro,"y")))
+    long_center.append(calc_center(selectcord_neighborhood(i,data_macro,"x"),selectcord_neighborhood(i,data_macro,"y"),'x'))
+    lat_center.append(calc_center(selectcord_neighborhood(i,data_macro,"x"),selectcord_neighborhood(i,data_macro,"y"),'y'))
+
+data_macrozones = pd.DataFrame()
+data_macrozones["MACROZONE"] = Macrozones
+data_macrozones["AREA"] = area_macrozone
+data_macrozones["LAT_CENTER"] = lat_center
+data_macrozones["LONG_CENTER"] = long_center
+
+gi_macro = []
+lenght = len(Macrozones)
+for i in range(0,lenght,1):
+    index_macro = gravit(Macrozones[i],Macrozones,data_macrozones,data_hist)
+    gi.append(index_macro)
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
