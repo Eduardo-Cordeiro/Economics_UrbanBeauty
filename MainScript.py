@@ -7,7 +7,8 @@ data_neigh = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Neighb
 data_macro = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Macro_Convert_Vertex.xlsx")
 data_hist = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Historical_Sites.xlsx")
 data_parks = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Parks.xlsx")
-
+neighborhoods_pop_centers = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Pop_Neighborhood_Center.xlsx")  
+macrozones_pop_centers = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Pop_Macrozone_Center.xlsx") 
 
 data_neigh = data_neigh.sort_values(by="Name")
 neighborhoods = list(set(data_neigh["Name"].to_list()))
@@ -203,12 +204,34 @@ for i in range(0,lenght,1):
     index = gravit(neighborhoods[i],neighborhoods,data_neighbors,data_parks,True)
     gi_rec_scored_geom.append(index)
 
+gi_hist_pop = []
+lenght = len(neighborhoods)
+for i in range(0,lenght,1):
+    index = gravit(neighborhoods[i],neighborhoods,neighborhoods_pop_centers,data_hist,False)
+    gi_hist_pop.append(index)
+
+gi_rec_pop = []
+lenght = len(neighborhoods)
+for i in range(0,lenght,1):
+    index = gravit(neighborhoods[i],neighborhoods,neighborhoods_pop_centers,data_parks,False)
+    gi_rec_pop.append(index)
+
+gi_rec_scored_pop = []
+lenght = len(neighborhoods)
+for i in range(0,lenght,1):
+    index = gravit(neighborhoods[i],neighborhoods,neighborhoods_pop_centers,data_parks,True)
+    gi_rec_scored_pop.append(index)
+
 data_neighbors["HGI_GEOM_CENTER"] = gi_hist_geom
 data_neighbors["RGI_GEOM_CENTER"] = gi_rec_geom
 data_neighbors["RGI_Scored_GEOM_CENTER"] = gi_rec_scored_geom
+data_neighbors["HGI_POP_CENTER"] = gi_hist_pop
+data_neighbors["RGI_POP_CENTER"] = gi_rec_pop
+data_neighbors["RGI_Scored_POP_CENTER"] = gi_rec_scored_pop
 
 #Macrozones
 
+#Geometrical
 gi_hist_geom = []
 lenght = len(Macrozones)
 for i in range(0,lenght,1):
@@ -227,9 +250,48 @@ for i in range(0,lenght,1):
     index = gravit(Macrozones[i],Macrozones,data_macrozones,data_parks,True)
     gi_rec_scored_geom.append(index)
 
+#Populacional
+gi_hist_pop = []
+lenght = len(Macrozones)
+for i in range(0,lenght,1):
+    index_macro_geom = gravit(Macrozones[i],Macrozones,macrozones_pop_centers,data_hist,False)
+    gi_hist_pop.append(index_macro_geom)
+
+gi_rec_pop = []
+lenght = len(Macrozones)
+for i in range(0,lenght,1):
+    index_macro_pop = gravit(Macrozones[i],Macrozones,macrozones_pop_centers,data_parks,False)
+    gi_rec_pop.append(index_macro_pop)
+
+gi_rec_scored_pop = []
+lenght = len(Macrozones)
+for i in range(0,lenght,1):
+    index = gravit(Macrozones[i],Macrozones,macrozones_pop_centers,data_parks,True)
+    gi_rec_scored_pop.append(index)
+
 data_macrozones["HGI_GEOM_CENTER"] = gi_hist_geom
 data_macrozones["RGI_GEOM_CENTER"] = gi_rec_geom
 data_macrozones["RGI_Scored_GEOM_CENTER"] = gi_rec_scored_geom
+data_macrozones["HGI_POP_CENTER"] = gi_hist_pop
+data_macrozones["RGI_POP_CENTER"] = gi_rec_pop
+data_macrozones["RGI_Scored_POP_CENTER"] = gi_rec_scored_pop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
