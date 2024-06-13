@@ -100,17 +100,22 @@ def dist(x1,y1,x2,y2):
     return np.round(res, 2)        
 
 # Gravitacional index
-def gravit(bairro,neighborhoods,data_center,data_park):
+def gravit(bairro,neighborhoods,data_center,data_park,weighted):
     index = neighborhoods.index(str(bairro))
     lista_dists = []
     sqrinv = []
+    s = data_parks["Normalized_Score"][index]
     x = data_center["LONG_CENTER"][index]
     y = data_center["LAT_CENTER"][index]
     for i in range(0,len(data_park["Long"]),1):
         a = dist(x,y,data_park["Long"].tolist()[i],data_park["Lat"].tolist()[i])
         lista_dists.append(a)
     for i in lista_dists:
-        b = 1/(i**2)
+        if weighted:
+            b = s/(i**2)
+        else:
+            b = 1/(i**2)
+        
         sqrinv.append(b)
     return sum(sqrinv)
 
@@ -129,6 +134,17 @@ def media(neighborhood,neighborhoods,data_center,data_park):
         lista_dists.append(a)
     return sum(lista_dists)/n
 
+def max_min_norm(df, column_name):
+    min_val = df[column_name].min()
+    max_val = df[column_name].max()
+    
+    # Apply the max-min normalization formula
+    normalized_column = (df[column_name] - min_val) / (max_val - min_val)
+    return normalized_column
+
+#Applying Max-Min normalization to the Score of parks
+ 
+data_parks["Normalized_Score"] = max_min_norm(data_parks,"Score") 
 
 #Defining the area and geometrical center of neighborhoods and macrozones
 area_neighborhood = []
@@ -172,37 +188,67 @@ data_macrozones["LONG_CENTER"] = long_center
 gi_hist_geom = []
 lenght = len(neighborhoods)
 for i in range(0,lenght,1):
-    index = gravit(neighborhoods[i],neighborhoods,data_neighbors,data_hist)
+    index = gravit(neighborhoods[i],neighborhoods,data_neighbors,data_hist,False)
     gi_hist_geom.append(index)
 
 gi_rec_geom = []
 lenght = len(neighborhoods)
 for i in range(0,lenght,1):
-    index = gravit(neighborhoods[i],neighborhoods,data_neighbors,data_parks)
+    index = gravit(neighborhoods[i],neighborhoods,data_neighbors,data_parks,False)
     gi_rec_geom.append(index)
 
+gi_rec_scored_geom = []
+lenght = len(neighborhoods)
+for i in range(0,lenght,1):
+    index = gravit(neighborhoods[i],neighborhoods,data_neighbors,data_parks,True)
+    gi_rec_scored_geom.append(index)
+
 data_neighbors["HGI_GEOM_CENTER"] = gi_hist_geom
-data_neighbors["HRI_GEOM_CENTER"] = gi_rec_geom
+data_neighbors["RGI_GEOM_CENTER"] = gi_rec_geom
+data_neighbors["RGI_Scored_GEOM_CENTER"] = gi_rec_scored_geom
 
 #Macrozones
 
 gi_hist_geom = []
 lenght = len(Macrozones)
 for i in range(0,lenght,1):
-    index_macro_geom = gravit(Macrozones[i],Macrozones,data_macrozones,data_hist)
+    index_macro_geom = gravit(Macrozones[i],Macrozones,data_macrozones,data_hist,False)
     gi_hist_geom.append(index_macro_geom)
 
 gi_rec_geom = []
 lenght = len(Macrozones)
 for i in range(0,lenght,1):
-    index_macro_geom = gravit(Macrozones[i],Macrozones,data_macrozones,data_parks)
+    index_macro_geom = gravit(Macrozones[i],Macrozones,data_macrozones,data_parks,False)
     gi_rec_geom.append(index_macro_geom)
 
-data_macrozones["HGI_GEOM_CENTER"] = gi_hist_geom
-data_macrozones["HRI_GEOM_CENTER"] = gi_rec_geom
+gi_rec_scored_geom = []
+lenght = len(Macrozones)
+for i in range(0,lenght,1):
+    index = gravit(Macrozones[i],Macrozones,data_macrozones,data_parks,True)
+    gi_rec_scored_geom.append(index)
 
-print(data_neighbors)
-print(data_macrozones)
+data_macrozones["HGI_GEOM_CENTER"] = gi_hist_geom
+data_macrozones["RGI_GEOM_CENTER"] = gi_rec_geom
+data_macrozones["RGI_Scored_GEOM_CENTER"] = gi_rec_scored_geom
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
