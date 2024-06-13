@@ -6,6 +6,7 @@ import numpy as np
 data_neigh = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Neighborhood_Vertices.xlsx")
 data_macro = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Macro_Convert_Vertex.xlsx")
 data_hist = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Historical_Sites.xlsx")
+data_parks = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Parks.xlsx")
 
 
 data_neigh = data_neigh.sort_values(by="Name")
@@ -129,27 +130,16 @@ def media(neighborhood,neighborhoods,data_center,data_park):
     return sum(lista_dists)/n
 
 
+#Defining the area and geometrical center of neighborhoods and macrozones
 area_neighborhood = []
-long_center = []
-lat_center = []
+long_center_neighborhood = []
+lat_center_neighborhood = []
 
 for i in neighborhoods:
     area_neighborhood.append(area_calc(selectcord_neighborhood(i,data_neigh,"x"),selectcord_neighborhood(i,data_neigh,"y")))
-    long_center.append(calc_center(selectcord_neighborhood(i,data_neigh,"x"),selectcord_neighborhood(i,data_neigh,"y"),'x'))
-    lat_center.append(calc_center(selectcord_neighborhood(i,data_neigh,"x"),selectcord_neighborhood(i,data_neigh,"y"),'y'))
+    long_center_neighborhood.append(calc_center(selectcord_neighborhood(i,data_neigh,"x"),selectcord_neighborhood(i,data_neigh,"y"),'x'))
+    lat_center_neighborhood.append(calc_center(selectcord_neighborhood(i,data_neigh,"x"),selectcord_neighborhood(i,data_neigh,"y"),'y'))
 
-data_neighbors = pd.DataFrame()
-data_neighbors["NEIGHBORHOOD"] = neighborhoods
-data_neighbors["AREA"] = area_neighborhood
-data_neighbors["LAT_CENTER"] = lat_center
-data_neighbors["LONG_CENTER"] = long_center
-
-gi = []
-lenght = len(neighborhoods)
-for i in range(0,lenght,1):
-    index = gravit(neighborhoods[i],neighborhoods,data_neighbors,data_hist)
-    gi.append(index)
-    
 area_macrozone = []
 long_center = []
 lat_center = []
@@ -159,17 +149,77 @@ for i in Macrozones:
     long_center.append(calc_center(selectcord_neighborhood(i,data_macro,"x"),selectcord_neighborhood(i,data_macro,"y"),'x'))
     lat_center.append(calc_center(selectcord_neighborhood(i,data_macro,"x"),selectcord_neighborhood(i,data_macro,"y"),'y'))
 
+
+# creating the dataframes 
+data_neighbors = pd.DataFrame()
+data_neighbors["NEIGHBORHOOD"] = neighborhoods
+data_neighbors["AREA"] = area_neighborhood
+data_neighbors["AREA"] = data_neighbors["AREA"].apply(lambda x: abs(x) if x < 0 else x)
+data_neighbors["LAT_CENTER"] = lat_center_neighborhood
+data_neighbors["LONG_CENTER"] = long_center_neighborhood
+
 data_macrozones = pd.DataFrame()
 data_macrozones["MACROZONE"] = Macrozones
 data_macrozones["AREA"] = area_macrozone
+data_macrozones["AREA"] = data_macrozones["AREA"].apply(lambda x: abs(x) if x < 0 else x)
 data_macrozones["LAT_CENTER"] = lat_center
 data_macrozones["LONG_CENTER"] = long_center
 
-gi_macro = []
+# defining GI's and its variations
+
+#Neighborhoods 
+
+gi_hist_geom = []
+lenght = len(neighborhoods)
+for i in range(0,lenght,1):
+    index = gravit(neighborhoods[i],neighborhoods,data_neighbors,data_hist)
+    gi_hist_geom.append(index)
+
+gi_rec_geom = []
+lenght = len(neighborhoods)
+for i in range(0,lenght,1):
+    index = gravit(neighborhoods[i],neighborhoods,data_neighbors,data_parks)
+    gi_rec_geom.append(index)
+
+data_neighbors["HGI_GEOM_CENTER"] = gi_hist_geom
+data_neighbors["HRI_GEOM_CENTER"] = gi_rec_geom
+
+#Macrozones
+
+gi_hist_geom = []
 lenght = len(Macrozones)
 for i in range(0,lenght,1):
-    index_macro = gravit(Macrozones[i],Macrozones,data_macrozones,data_hist)
-    gi.append(index_macro)
+    index_macro_geom = gravit(Macrozones[i],Macrozones,data_macrozones,data_hist)
+    gi_hist_geom.append(index_macro_geom)
+
+gi_rec_geom = []
+lenght = len(Macrozones)
+for i in range(0,lenght,1):
+    index_macro_geom = gravit(Macrozones[i],Macrozones,data_macrozones,data_parks)
+    gi_rec_geom.append(index_macro_geom)
+
+data_macrozones["HGI_GEOM_CENTER"] = gi_hist_geom
+data_macrozones["HRI_GEOM_CENTER"] = gi_rec_geom
+
+print(data_neighbors)
+print(data_macrozones)
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
