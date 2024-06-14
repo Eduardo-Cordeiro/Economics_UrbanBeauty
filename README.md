@@ -2,7 +2,7 @@
 
 An attempt to measure **Urban Beauty** using a **Gravitational Index**.
 
-The idea is to assign *weights* to each neighborhood in a city based on the amount of beauty it possesses. A proxy for beauty is determined by the quantity of historical, cultural, and recreational attractions near the center of each neighborhood.
+The idea is to assign *weights* to each neighborhood in a city based on the amount of beauty it possesses. A proxy for beauty is determined by the quantity of historical, cultural, and recreational attractions (scenic sites) near the center of each neighborhood.
 
 It is expected that neighborhoods with a higher *weight* will have higher average housing prices and higher average wages.
 
@@ -15,9 +15,7 @@ The city under study can be divided into various entities, notably 'Bairros' (Ne
 #### Geometric Center
 By acquiring the shapefiles of the Neighborhoods and Macrozones, we gain access to their polygons and consequently their respective vertices.
 
-With this information, it's possible to compute the Area and the Center of these forms using the expressions bellow:
-
-
+With this information, it's possible to compute the Area and the Center of these forms using the expressions bellow
 
 $$
 A = \frac{1}{2} \sum_{i=1}^{n-1} (x_{i}y_{i+1} - x_{i+1}y_{i})
@@ -71,7 +69,13 @@ $$
 where:
 - \( s \) is the score of the park i,
 
- 
+The scored is based on diferente itens:
+
+- Proximity of the park in relationship to the 'Orla do Guaíba' wich is the main Scenic Location of Porto Alegre,
+- Quality of Infraestructure of the park,
+- Size of the park.
+
+All these itens were normalized using max-min method, so the Score is always beetween 0 and 1.
 
 ## Step 4 - Review Data
 
