@@ -69,13 +69,13 @@ $$
 where:
 - \( s \) is the score of the park i,
 
-The scored is based on diferente itens:
+The score is based on diferentt itens:
 
 - Proximity of the park in relationship to the 'Orla do Guaíba' wich is the main Scenic Location of Porto Alegre,
 - Quality of Infraestructure of the park,
 - Size of the park.
 
-All these itens were normalized using max-min method, so the Score is always beetween 0 and 1.
+All these itens were normalized using max-min method, so the score is always beetween 0 and 1.
 
 ## Step 4 - Review Data
 
