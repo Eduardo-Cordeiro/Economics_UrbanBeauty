@@ -3,12 +3,13 @@ import numpy as np
 
 
 # Open xl file
-data_neigh = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Neighborhood_Vertices.xlsx")
-data_macro = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Macro_Convert_Vertex.xlsx")
-data_hist = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Historical_Sites.xlsx")
-data_parks = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Parks.xlsx")
-neighborhoods_pop_centers = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Pop_Neighborhood_Center.xlsx")  
-macrozones_pop_centers = pd.read_excel("C:\\Users\\escordeiro\\Downloads\\Data\\Data\\Pop_Macrozone_Center.xlsx") 
+
+data_neigh = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\Neighborhood_Vertices.xlsx")
+data_macro = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\Macro_Convert_Vertex.xlsx")
+data_hist = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\Historical_Sites.xlsx")
+data_parks = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\Parks.xlsx")
+neighborhoods_pop_centers = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\Pop_Neighborhood_Center.xlsx")  
+macrozones_pop_centers = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\Pop_Macrozone_Center.xlsx") 
 
 data_neigh = data_neigh.sort_values(by="Name")
 neighborhoods = list(set(data_neigh["Name"].to_list()))
@@ -174,6 +175,8 @@ data_neighbors["AREA"] = area_neighborhood
 data_neighbors["AREA"] = data_neighbors["AREA"].apply(lambda x: abs(x) if x < 0 else x)
 data_neighbors["LAT_CENTER"] = lat_center_neighborhood
 data_neighbors["LONG_CENTER"] = long_center_neighborhood
+data_neighbors["LAT_CENTER_POP"] = neighborhoods_pop_centers["LAT_CENTER"]
+data_neighbors["LONG_CENTER_POP"] = neighborhoods_pop_centers["LONG_CENTER"]
 
 data_macrozones = pd.DataFrame()
 data_macrozones["MACROZONE"] = Macrozones
@@ -181,6 +184,8 @@ data_macrozones["AREA"] = area_macrozone
 data_macrozones["AREA"] = data_macrozones["AREA"].apply(lambda x: abs(x) if x < 0 else x)
 data_macrozones["LAT_CENTER"] = lat_center
 data_macrozones["LONG_CENTER"] = long_center
+data_macrozones["LAT_CENTER_POP"] = macrozones_pop_centers["LAT_CENTER"]
+data_macrozones["LONG_CENTER_POP"] = macrozones_pop_centers["LONG_CENTER"]
 
 # defining GI's and its variations
 
@@ -275,6 +280,99 @@ data_macrozones["RGI_Scored_GEOM_CENTER"] = gi_rec_scored_geom
 data_macrozones["HGI_POP_CENTER"] = gi_hist_pop
 data_macrozones["RGI_POP_CENTER"] = gi_rec_pop
 data_macrozones["RGI_Scored_POP_CENTER"] = gi_rec_scored_pop
+
+
+data_neighbors.to_csv('C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\data_neighbors.csv')
+data_macrozones.to_csv('C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\data_macrozones.csv')
+print("sucesso")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
