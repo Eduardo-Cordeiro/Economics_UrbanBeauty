@@ -11,30 +11,30 @@ macrozones = pd.read_csv("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\
 #Pining center with Folium
 m = folium.Map(location=(-30, -51))
 #Groups
-Macrozones_Group = folium.FeatureGroup(name='Macrozones')
-Neighborhoods_Group = folium.FeatureGroup(name='Neighborhoods')
+Macrozones_Group = folium.FeatureGroup(name='🚩 Macrozones')
+Neighborhoods_Group = folium.FeatureGroup(name='🚩 Neighborhoods')
 #Macro SubGroups
-Macro_Historical = folium.plugins.FeatureGroupSubGroup(Macrozones_Group, 'Macro Historic Index')
-Macro_Recreacional = folium.plugins.FeatureGroupSubGroup(Macrozones_Group, 'Macro Recreacional Index')
+Macro_Historical = folium.plugins.FeatureGroupSubGroup(Macrozones_Group, ' ➡️ Macro Historic Index')
+Macro_Recreacional = folium.plugins.FeatureGroupSubGroup(Macrozones_Group, ' ➡️ Macro Recreacional Index',show=False)
 #Inside Macro Historical SubGroups
-Macro_Historical_Geom = folium.plugins.FeatureGroupSubGroup(Macro_Historical, 'Historic Index Geometric Center')
-Macro_Historical_Pop = folium.plugins.FeatureGroupSubGroup(Macro_Historical, 'Historic Index Populational Center')
+Macro_Historical_Geom = folium.plugins.FeatureGroupSubGroup(Macro_Historical, '➖  Macrozone Historic Index Geometric Center')
+Macro_Historical_Pop = folium.plugins.FeatureGroupSubGroup(Macro_Historical, '➖  Macrozone Historic Index Populational Center',show=False)
 #Inside Macro Recreacional SubGroups
-Macro_Recreacional_Geom = folium.plugins.FeatureGroupSubGroup(Macro_Recreacional, 'Recreacional Index Geometric Center')
-Macro_Recreacional_Pop = folium.plugins.FeatureGroupSubGroup(Macro_Recreacional, 'Recreacional Index Populational Center')
-Macro_Recreacional_Geom_Scored = folium.plugins.FeatureGroupSubGroup(Macro_Recreacional, 'Scored Recreacional Index Geometric Center')
-Macro_Recreacional_Pop_Scored = folium.plugins.FeatureGroupSubGroup(Macro_Recreacional, 'Scored Recreacional Index Populational Center')
+Macro_Recreacional_Geom = folium.plugins.FeatureGroupSubGroup(Macro_Recreacional, '➖ Macrozone Recreacional Index Geometric Center',show=False)
+Macro_Recreacional_Pop = folium.plugins.FeatureGroupSubGroup(Macro_Recreacional, '➖ Macrozone Recreacional Index Populational Center',show=False)
+Macro_Recreacional_Geom_Scored = folium.plugins.FeatureGroupSubGroup(Macro_Recreacional, '➖ Macrozone Scored Recreacional Index Geometric Center',show=False)
+Macro_Recreacional_Pop_Scored = folium.plugins.FeatureGroupSubGroup(Macro_Recreacional, '➖ Macrozone Scored Recreacional Index Populational Center',show=False)
 #Neighborhood SubGroups
-Neighborhood_Historical = folium.plugins.FeatureGroupSubGroup(Neighborhoods_Group, 'Neighborhood Historic Index')
-Neighborhood_Recreacional = folium.plugins.FeatureGroupSubGroup(Neighborhoods_Group, 'Neighborhood Recreacional Index')
+Neighborhood_Historical = folium.plugins.FeatureGroupSubGroup(Neighborhoods_Group, '➡️ Neighborhood Historic Index')
+Neighborhood_Recreacional = folium.plugins.FeatureGroupSubGroup(Neighborhoods_Group, '➡️ Neighborhood Recreacional Index',show=False)
 #Inside Neighborhood Historical SubGroups
-Neighborhood_Historical_Geom = folium.plugins.FeatureGroupSubGroup(Neighborhood_Historical, 'Historic Index Geometric Center')
-Neighborhood_Historical_Pop = folium.plugins.FeatureGroupSubGroup(Neighborhood_Historical, 'Historic Index Populational Center')
+Neighborhood_Historical_Geom = folium.plugins.FeatureGroupSubGroup(Neighborhood_Historical, '➖ Neighborhood Historic Index Geometric Center')
+Neighborhood_Historical_Pop = folium.plugins.FeatureGroupSubGroup(Neighborhood_Historical, '➖ Neighborhood Historic Index Populational Center',show=False)
 #Inside Neighborhood Recreacional SubGroups
-Neighborhood_Recreacional_Geom = folium.plugins.FeatureGroupSubGroup(Neighborhood_Recreacional, 'Recreacional Index Geometric Center')
-Neighborhood_Recreacional_Pop = folium.plugins.FeatureGroupSubGroup(Neighborhood_Recreacional, 'Recreacional Index Populational Center')
-Neighborhood_Recreacional_Geom_Scored = folium.plugins.FeatureGroupSubGroup(Neighborhood_Recreacional, 'Scored Recreacional Index Geometric Center')
-Neighborhood_Recreacional_Pop_Scored = folium.plugins.FeatureGroupSubGroup(Neighborhood_Recreacional, 'Scored Recreacional Index Populational Center')
+Neighborhood_Recreacional_Geom = folium.plugins.FeatureGroupSubGroup(Neighborhood_Recreacional, '➖ Neighborhood Recreacional Index Geometric Center',show=False)
+Neighborhood_Recreacional_Pop = folium.plugins.FeatureGroupSubGroup(Neighborhood_Recreacional, '➖ Neighborhood Recreacional Index Populational Center',show=False)
+Neighborhood_Recreacional_Geom_Scored = folium.plugins.FeatureGroupSubGroup(Neighborhood_Recreacional, '➖ Neighborhood Scored Recreacional Index Geometric Center',show=False)
+Neighborhood_Recreacional_Pop_Scored = folium.plugins.FeatureGroupSubGroup(Neighborhood_Recreacional, '➖ Neighborhood Scored Recreacional Index Populational Center',show=False)
 
 
 
@@ -94,19 +94,18 @@ for i in columns:
 
 Macrozones_Group.add_to(m)
 Macro_Historical.add_to(m)
-Macro_Recreacional.add_to(m)
 Macro_Historical_Geom.add_to(m)
 Macro_Historical_Pop.add_to(m)
+Macro_Recreacional.add_to(m)
 Macro_Recreacional_Geom.add_to(m)
 Macro_Recreacional_Pop.add_to(m)
 Macro_Recreacional_Geom_Scored.add_to(m)
 Macro_Recreacional_Pop_Scored.add_to(m)
-
 Neighborhoods_Group.add_to(m)
 Neighborhood_Historical.add_to(m)
-Neighborhood_Recreacional.add_to(m)
 Neighborhood_Historical_Geom.add_to(m)
 Neighborhood_Historical_Pop.add_to(m)
+Neighborhood_Recreacional.add_to(m)
 Neighborhood_Recreacional_Geom.add_to(m)
 Neighborhood_Recreacional_Pop.add_to(m)
 Neighborhood_Recreacional_Geom_Scored.add_to(m)
@@ -115,4 +114,5 @@ Neighborhood_Recreacional_Pop_Scored.add_to(m)
 
 folium.LayerControl().add_to(m)
 m.save("Column.html")
+
 
