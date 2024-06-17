@@ -37,8 +37,7 @@ Neighborhood_Recreacional_Geom_Scored = folium.plugins.FeatureGroupSubGroup(Neig
 Neighborhood_Recreacional_Pop_Scored = folium.plugins.FeatureGroupSubGroup(Neighborhood_Recreacional, '➖ Neighborhood Scored Recreacional Index Populational Center',show=False)
 
 
-
-def MacroSubGrouping(Column):
+def MacroSubGroupingGeom(Column):
     for i in macrozones["MACROZONE"]:
         a = folium.CircleMarker(
             location = (macrozones.loc[macrozones["MACROZONE"] == i,"LAT_CENTER"].values[0], macrozones.loc[macrozones["MACROZONE"] == i,"LONG_CENTER"].values[0]),
@@ -55,14 +54,26 @@ def MacroSubGrouping(Column):
             a.add_to(Macro_Recreacional_Geom)
         elif Column == 'RGI_Scored_GEOM_CENTER':
             a.add_to(Macro_Recreacional_Geom_Scored)
-        elif Column == 'HGI_POP_CENTER':
+    
+def MacroSubGroupingPop(Column):
+    for i in macrozones["MACROZONE"]:
+        a = folium.CircleMarker(
+            location = (macrozones.loc[macrozones["MACROZONE"] == i,"LAT_CENTER_POP"].values[0], macrozones.loc[macrozones["MACROZONE"] == i,"LONG_CENTER_POP"].values[0]),
+            popup = i,
+            radius = 3*(np.log(macrozones.loc[macrozones["MACROZONE"] == i,Column].values[0]+1)),
+            color='blue',
+            fill=True,
+            fill_color='blue',
+            fill_opacity=0.6,
+            )
+        if Column == 'HGI_POP_CENTER':
             a.add_to(Macro_Historical_Pop)
         elif Column == 'RGI_POP_CENTER':
             a.add_to(Macro_Recreacional_Pop)
         elif Column == 'RGI_Scored_POP_CENTER':
             a.add_to(Macro_Recreacional_Pop_Scored)
     
-def NeighSubGrouping(Column):
+def NeighSubGroupingGeom(Column):
     for i in neighborhoods["NEIGHBORHOOD"]:
         b = folium.CircleMarker(
             location = (neighborhoods.loc[neighborhoods["NEIGHBORHOOD"] == i,"LAT_CENTER"].values[0], neighborhoods.loc[neighborhoods["NEIGHBORHOOD"] == i,"LONG_CENTER"].values[0]),
@@ -79,17 +90,32 @@ def NeighSubGrouping(Column):
             b.add_to(Neighborhood_Recreacional_Geom)
         elif Column == 'RGI_Scored_GEOM_CENTER':
             b.add_to(Neighborhood_Recreacional_Geom_Scored)
-        elif Column == 'HGI_POP_CENTER':
+
+def NeighSubGroupingPop(Column):
+    for i in neighborhoods["NEIGHBORHOOD"]:
+        b = folium.CircleMarker(
+            location = (neighborhoods.loc[neighborhoods["NEIGHBORHOOD"] == i,"LAT_CENTER_POP"].values[0], neighborhoods.loc[neighborhoods["NEIGHBORHOOD"] == i,"LONG_CENTER_POP"].values[0]),
+            popup = i,
+            radius = 2*(np.log(neighborhoods.loc[neighborhoods["NEIGHBORHOOD"] == i,Column].values[0]+1)),
+            color='red',
+            fill=True,
+            fill_color='red',
+            fill_opacity=0.6,
+            )
+        if Column == 'HGI_POP_CENTER':
             b.add_to(Neighborhood_Historical_Pop)
         elif Column == 'RGI_POP_CENTER':
             b.add_to(Neighborhood_Recreacional_Pop)
         elif Column == 'RGI_Scored_POP_CENTER':
             b.add_to(Neighborhood_Recreacional_Pop_Scored)
 
-columns = list(macrozones.columns[5:])
+
+columns = list(macrozones.columns[7:])
 for i in columns:
-    MacroSubGrouping(i)
-    NeighSubGrouping(i)
+    MacroSubGroupingGeom(i)
+    MacroSubGroupingPop(i)
+    NeighSubGroupingGeom(i)
+    NeighSubGroupingPop(i)
 
 
 Macrozones_Group.add_to(m)
@@ -113,6 +139,7 @@ Neighborhood_Recreacional_Pop_Scored.add_to(m)
 
 
 folium.LayerControl().add_to(m)
-m.save("Column.html")
+m.save("Map.html")
+
 
 
