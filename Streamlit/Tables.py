@@ -30,6 +30,10 @@ neighborhoods.rename(columns={'Unnamed: 0': 'Index'}, inplace=True)
 print(macrozones)
 print(neighborhoods)
 
+# Build Dash
 
+st.markdown(f"Macrozones DataFrame")
 st.dataframe(macrozones,hide_index=True,use_container_width=True)
+
+st.markdown(f"Neighborhoods DataFrame")
 st.dataframe(neighborhoods,hide_index=True,use_container_width=True)
