@@ -15,8 +15,6 @@ response2 = requests.get(url2)
 # Check that the request was successful
 response2.raise_for_status()  
 
-
-
 # Read the CSV content into a DataFrame
 csv_content1 = response1.text
 macrozones = pd.read_csv(StringIO(csv_content1), delimiter=',')
@@ -25,8 +23,10 @@ macrozones = pd.read_csv(StringIO(csv_content1), delimiter=',')
 csv_content2 = response2.text
 neighborhoods = pd.read_csv(StringIO(csv_content2), delimiter=',')
 
-
 # Display the DataFrame
+macrozones.rename(columns={'Unnamed: 0': 'Index'}, inplace=True)
+neighborhoods.rename(columns={'Unnamed: 0': 'Index'}, inplace=True)
+
 print(macrozones)
 print(neighborhoods)
 
