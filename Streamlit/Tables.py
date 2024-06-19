@@ -30,5 +30,6 @@ neighborhoods = pd.read_csv(StringIO(csv_content2), delimiter=',')
 print(macrozones)
 print(neighborhoods)
 
-st.table(macrozones)
-st.table(neighborhoods)
+
+st.dataframe(macrozones,hide_index=True,use_container_width=True)
+st.dataframe(neighborhoods,hide_index=True,use_container_width=True)
