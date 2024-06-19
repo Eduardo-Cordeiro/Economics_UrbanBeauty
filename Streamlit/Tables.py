@@ -23,7 +23,7 @@ macrozones = pd.read_csv(StringIO(csv_content1), delimiter=',')
 
 # Read the CSV content into a DataFrame
 csv_content2 = response2.text
-neighborhoods = pd.read_csv(StringIO(csv_content1), delimiter=',')
+neighborhoods = pd.read_csv(StringIO(csv_content2), delimiter=',')
 
 
 # Display the DataFrame
