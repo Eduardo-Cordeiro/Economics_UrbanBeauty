@@ -68,5 +68,5 @@ neighborhood_corr = correlation_frame[["HGI_GEOM_CENTER","RGI_GEOM_CENTER","RGI_
 st.markdown(f"Correlation Matrix")
 
 fig, ax = plt.subplots()
-sns.heatmap(neighborhood_corr, annot=True, ax=ax)
+seaborn.heatmap(neighborhood_corr, annot=True, ax=ax)
 st.write(fig)
