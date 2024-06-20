@@ -4,13 +4,14 @@ import numpy as np
 
 # Open xl file
 
-data_neigh = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\Neighborhood_Vertices.xlsx")
-data_macro = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\Macro_Convert_Vertex.xlsx")
-data_hist = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\Historical_Sites.xlsx")
-data_parks = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\Parks.xlsx")
-neighborhoods_pop_centers = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\Pop_Neighborhood_Center.xlsx")  
-macrozones_pop_centers = pd.read_excel("C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\Pop_Macrozone_Center.xlsx") 
+data_neigh = pd.read_excel("Data\\Neighborhood_Vertices.xlsx")
+data_macro = pd.read_excel("Data\\Macro_Convert_Vertex.xlsx")
+data_hist = pd.read_excel("Data\\Historical_Sites.xlsx")
+data_parks = pd.read_excel("Data\\Parks.xlsx")
+neighborhoods_pop_centers = pd.read_excel("Data\\Pop_Neighborhood_Center.xlsx")  
+macrozones_pop_centers = pd.read_excel("Data\\Pop_Macrozone_Center.xlsx") 
 
+data_neigh = data_neigh[data_neigh["Name"] != "ARQUIPÉLAGO"]
 data_neigh = data_neigh.sort_values(by="Name")
 neighborhoods = list(set(data_neigh["Name"].to_list()))
 neighborhoods.sort()
@@ -282,101 +283,14 @@ data_macrozones["RGI_POP_CENTER"] = gi_rec_pop
 data_macrozones["RGI_Scored_POP_CENTER"] = gi_rec_scored_pop
 
 
-data_neighbors.to_csv('C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\data_neighbors.csv')
-data_macrozones.to_csv('C:\\Users\\eduar\\Desktop\\GitHubProjects\\TCC\\Data\\Data\\data_macrozones.csv')
+data_neighbors.to_csv('Data\\data_neighbors.csv')
+data_macrozones.to_csv('Data\\data_macrozones.csv')
+
+#Correlation
+
+neighborhood_corr = data_neighbors[["HGI_GEOM_CENTER","RGI_GEOM_CENTER","RGI_Scored_GEOM_CENTER","HGI_POP_CENTER","RGI_POP_CENTER","RGI_Scored_POP_CENTER"]].corr()
+print(neighborhood_corr)
 print("sucesso")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
