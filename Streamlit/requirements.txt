@@ -2,6 +2,5 @@ streamlit
 pandas
 requests
 streamlit
-streamlit.components.v1
 seaborn
 matplotlib.pyplot
