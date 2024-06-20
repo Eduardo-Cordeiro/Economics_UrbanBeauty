@@ -3,7 +3,7 @@ import requests
 from io import StringIO
 import streamlit as st
 import streamlit.components.v1 as components
-#import seaborn as sns
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 
@@ -68,5 +68,5 @@ neighborhood_corr = correlation_frame[["HGI_GEOM_CENTER","RGI_GEOM_CENTER","RGI_
 st.markdown(f"Correlation Matrix")
 
 fig, ax = plt.subplots()
-seaborn.heatmap(neighborhood_corr, annot=True, ax=ax)
+sns.heatmap(neighborhood_corr, annot=True, ax=ax)
 st.write(fig)
