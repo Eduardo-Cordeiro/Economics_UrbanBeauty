@@ -69,4 +69,4 @@ st.markdown(f"Correlation Matrix")
 
 fig, ax = plt.subplots()
 sns.heatmap(neighborhood_corr, annot=True, ax=ax)
-st.pyplot(fig)
+st.write(fig)
