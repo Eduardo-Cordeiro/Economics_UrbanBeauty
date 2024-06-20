@@ -3,7 +3,7 @@ import requests
 from io import StringIO
 import streamlit as st
 import streamlit.components.v1 as components
-import seaborn as sns
+#import seaborn as sns
 import matplotlib.pyplot as plt
 
 
