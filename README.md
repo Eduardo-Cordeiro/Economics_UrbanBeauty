@@ -83,7 +83,7 @@ The quality was determined by the quality of infrastructure.
 
 On the 'Streamlit' repository it's possible to visualize the Dataframes, Map and a Correlation Matrix were we can see, compare an get some insights about the Data obtained.
 
-The StreamLit app can be accessed on the link bellow:
+The Streamlit app can be accessed on the link bellow:
 https://economicsurbanbeauty-rvgejj7wd9luepcjwnlpcv.streamlit.app/
 
 ## Step 5 - Correlation Analysis
