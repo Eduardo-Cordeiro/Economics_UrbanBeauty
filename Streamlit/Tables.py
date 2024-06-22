@@ -5,7 +5,22 @@ import streamlit as st
 import streamlit.components.v1 as components
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 
+def max_min_norm(df, column_name):
+    min_val = df[column_name].min()
+    max_val = df[column_name].max()
+    
+    # Apply the max-min normalization formula
+    normalized_column = (df[column_name] - min_val) / (max_val - min_val)
+    return normalized_column
+
+def log_norm(df, column_name):
+    norm = np.log(df[column_name]+1)
+
+    # Apply the max-min normalization formula
+    
+    return norm
 
 # URL of the raw CSV file on GitHub
 url1 = 'https://raw.githubusercontent.com/Eduardo-Cordeiro/Economics_UrbanBeauty/main/Data/data_macrozones.csv'
@@ -37,11 +52,7 @@ dropout = pd.read_csv(StringIO(csv_content4), delimiter=',')
 macrozones.rename(columns={'Unnamed: 0': 'Index'}, inplace=True)
 neighborhoods.rename(columns={'Unnamed: 0': 'Index'}, inplace=True)
 
-print(wages)
-print(dropout)
-
 # Build Dash
-
 st.markdown(f"Macrozones DataFrame")
 st.dataframe(macrozones,hide_index=True,use_container_width=True)
 
@@ -60,11 +71,15 @@ components.html(html_code, height=600)
 #Correlation
 cor1 = pd.merge(neighborhoods,wages,on='NEIGHBORHOOD')
 correlation_frame = pd.merge(cor1,dropout,on='NEIGHBORHOOD')
-print(correlation_frame)
+columns = ["HGI_GEOM_CENTER","RGI_GEOM_CENTER","RGI_Scored_GEOM_CENTER","HGI_POP_CENTER","RGI_POP_CENTER","RGI_Scored_POP_CENTER","Average Wage (MW)","School Dropout (%)"]
+
+#Normalizing data
+for i in columns:
+    correlation_frame[str(i)] = log_norm(correlation_frame,str(i))
+
 #Correlation
-
-neighborhood_corr = correlation_frame[["HGI_GEOM_CENTER","RGI_GEOM_CENTER","RGI_Scored_GEOM_CENTER","HGI_POP_CENTER","RGI_POP_CENTER","RGI_Scored_POP_CENTER","Average Wage (MW)","School Dropout (%)"]].corr()
-
+neighborhood_corr = correlation_frame[columns].corr()
+print(neighborhood_corr)
 st.markdown(f"Correlation Matrix")
 
 fig, ax = plt.subplots()
