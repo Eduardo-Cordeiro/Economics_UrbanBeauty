@@ -86,6 +86,6 @@ sns.heatmap(neighborhood_corr,
             annot=True, 
             ax=ax,
             cmap='coolwarm', 
-            vmin=neighborhood_corr.min(), vmax=neighborhood_corr.max()
+            vmin=-1, vmax=1
             )
 st.write(fig)
