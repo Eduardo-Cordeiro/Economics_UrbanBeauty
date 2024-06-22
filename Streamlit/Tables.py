@@ -79,7 +79,6 @@ for i in columns:
 
 #Correlation
 neighborhood_corr = correlation_frame[columns].corr()
-print(neighborhood_corr)
 st.markdown(f"Correlation Matrix")
 
 fig, ax = plt.subplots()
@@ -87,6 +86,6 @@ sns.heatmap(neighborhood_corr,
             annot=True, 
             ax=ax,
             cmap='coolwarm', 
-            vmin=-1, vmax=1
+            vmin=neighborhood_corr.min(), vmax=neighborhood_corr.max()
             )
 st.write(fig)
