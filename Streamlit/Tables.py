@@ -83,7 +83,7 @@ print(neighborhood_corr)
 st.markdown(f"Correlation Matrix")
 
 fig, ax = plt.subplots()
-sns.heatmap(neighborhood_corr, 
+sns.heatmap(neighborhood_corr["Average Wage (MW)","School Dropout (%)"], 
             annot=True, 
             ax=ax,
             cmap='coolwarm', 
