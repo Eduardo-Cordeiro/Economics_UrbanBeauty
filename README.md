@@ -86,4 +86,8 @@ On the 'Streamlit' repository it's possible to visualize the Dataframes, Map and
 The Streamlit app can be accessed on the link bellow:
 https://economicsurbanbeauty-rvgejj7wd9luepcjwnlpcv.streamlit.app/
 
+(Gnerate the webscraping for housing prices)
+
 ## Step 5 - Correlation Analysis
+
+At the end of the data Visualisation link there's a correlations analysis where it's possible to identify that some variables have a relevant correlation, (mention the model and it's implications and the relationship between the variables.)
