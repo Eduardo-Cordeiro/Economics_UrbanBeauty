@@ -96,7 +96,7 @@ Here's the corrected version of your text with grammar and clarity improvements:
 
 ## Objectives ##
 
-- Obtain the Geometrical and Population Centers of Neighborhoods and Macrozones :ballot_box_with_check: :o:
+- Obtain the Geometrical and Population Centers of Neighborhoods and Macrozones :ballot_box_with_check:
 - List historic places and parks with information about their location, area, quality, and distance in relation to the main body of water in Porto Alegre (Lake Guaíba) :ballot_box_with_check:
 - Calculate the Recreational and Historical Indices for each subdivision of the city :ballot_box_with_check:
 - Obtain socioeconomic data about wages and education levels in Porto Alegre :ballot_box_with_check:
