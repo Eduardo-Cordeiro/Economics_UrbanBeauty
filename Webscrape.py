@@ -18,7 +18,11 @@ for i in range(pages):
         html = response.content
         soup = BeautifulSoup(html, 'html.parser')
         prices = soup.find_all('h1', class_="font-bold text-xl text-foxter-brand-700")
-        for i in prices:
+        adress = soup.find_all('div', class_="flex text-sm justify-start text-foxter-brand-900")
+        # Contém quartos, banheiros e vagas abaixo:
+        m_squared = soup.find_all('span', class_="whitespace-nowrap text-foxter-brand-900")
+        code = soup.find_all('div', class_="text-xs text-slate-500 cursor-pointer")
+        for i in code:
             print(i)   
     else:
         print("Error")
