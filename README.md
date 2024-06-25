@@ -91,3 +91,15 @@ https://economicsurbanbeauty-rvgejj7wd9luepcjwnlpcv.streamlit.app/
 ## Step 5 - Correlation Analysis
 
 At the end of the data Visualisation link there's a correlations analysis where it's possible to identify that some variables have a relevant correlation, (mention the model and it's implications and the relationship between the variables.)
+
+Here's the corrected version of your text with grammar and clarity improvements:
+
+## Objectives ##
+
+- Obtain the Geometrical and Population Centers of Neighborhoods and Macrozones :ballot_box_with_check: :o:
+- List historic places and parks with information about their location, area, quality, and distance in relation to the main body of water in Porto Alegre (Lake Guaíba) :ballot_box_with_check:
+- Calculate the Recreational and Historical Indices for each subdivision of the city :ballot_box_with_check:
+- Obtain socioeconomic data about wages and education levels in Porto Alegre :ballot_box_with_check:
+- Web scrape the average rent prices for housing in each subdivision of Porto Alegre :o:
+- Correlate the indices with the socioeconomic data to verify the relationships among variables :ballot_box_with_check:
+- Present the data on Streamlit :ballot_box_with_check:
