@@ -15,7 +15,13 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 # Ensure the path to your chromedriver is correct
 service = Service('chromedriver-win64\\chromedriver-win64\\chromedriver.exe')
 driver = webdriver.Chrome(service=service, options=chrome_options)
-pages = 50
+
+pages = 3
+
+# Info Lists
+prices_list = []
+street_list = []
+neighborhood_list = []
 
 ##interando por todas as paginas do site
 for i in range(1,pages,1):
@@ -31,8 +37,27 @@ for i in range(1,pages,1):
         # Print the fetched URL and a snippet of the content for debugging
         print(f'URL: {url}')
         soup = BeautifulSoup(driver.page_source, 'html.parser')
+        
         prices = soup.find_all('h1', class_="font-bold text-xl text-foxter-brand-700")
+        for p in prices:
+            string_price = str(p)
+            price = []
+            for char in string_price:
+                if char.isdigit():
+                    price.append(str(char))
+            joined = ''.join(price[4:-1])
+            prices_list.append(int(joined)/100)
+        
         adress = soup.find_all('div', class_="flex text-sm justify-start text-foxter-brand-900")
+        for a in adress:
+            string_adress = str(a)
+            if i == 1:
+                street = string_adress.split('>')[1].split('<')[0]
+                street_list.append(street)
+            
+                neighborhood = string_adress.split('>')[3].split('<')[0]
+                neighborhood_list.append(neighborhood)
+                
         # Contém quartos, banheiros e vagas abaixo:
         m_squared = soup.find_all('span', class_="whitespace-nowrap text-foxter-brand-900")
         code = soup.find_all('div', class_="text-xs text-slate-500 cursor-pointer")    
@@ -40,3 +65,6 @@ for i in range(1,pages,1):
         print("Error")
         # Print the response content as text
         #print(response.text)
+print(prices_list)
+print(street_list)
+print(neighborhood_list)
