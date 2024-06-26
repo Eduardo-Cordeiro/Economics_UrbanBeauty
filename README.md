@@ -100,6 +100,6 @@ Here's the corrected version of your text with grammar and clarity improvements:
 - List historic places and parks with information about their location, area, quality, and distance in relation to the main body of water in Porto Alegre (Lake Guaíba) :ballot_box_with_check:
 - Calculate the Recreational and Historical Indices for each subdivision of the city :ballot_box_with_check:
 - Obtain socioeconomic data about wages and education levels in Porto Alegre :ballot_box_with_check:
-- Web scrape the average rent prices for housing in each subdivision of Porto Alegre :o:
+- Web scrape the average rent prices for housing in each subdivision of Porto Alegre :ballot_box_with_check:
 - Correlate the indices with the socioeconomic data to verify the relationships among variables :ballot_box_with_check:
 - Present the data on Streamlit :ballot_box_with_check:
