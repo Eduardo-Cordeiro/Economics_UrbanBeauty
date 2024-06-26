@@ -17,7 +17,7 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 service = Service('chromedriver-win64\\chromedriver-win64\\chromedriver.exe')
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
-pages = 4
+pages = 1000
 
 # Info Lists
 prices_list = []
@@ -32,7 +32,7 @@ for i in range(1,pages,1):
     ##Obtendo o HTML
     url = f'https://www.foxterciaimobiliaria.com.br/imoveis/a-venda/em-porto-alegre-rs?page={i}'
     driver.get(url)
-    time.sleep(2)
+    time.sleep(1)
 # Send a GET request to the URL
     response = requests.get(url,headers={'Cache-Control': 'no-cache'})
 # Check if the request was successful
@@ -104,16 +104,11 @@ df["Neighborhood"] = neighborhood_list
 df["Price"] = prices_list
 df["m²"] = m_squared_list
 df["Street"] = street_list
-df["Price/m²"] = round((df["Price"]/df['m²']),3)
-
-print(df['Price'])
+df["Price/m²"] = df["Price"]/df['m²']
 df.to_csv('Data\\Webscrape_Data_Brute.csv')
-
 
 df_media = pd.DataFrame()
 df_media = df.groupby('Neighborhood')['Price/m²'].mean()
 df_media = df_media.to_frame()
 df_media = df_media.sort_values(by="Price/m²",ascending=False)
 df_media.to_csv('Data\\Webscrape_Data_Avg.csv')
-
-print(df.dtypes)
