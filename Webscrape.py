@@ -17,7 +17,7 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 service = Service('chromedriver-win64\\chromedriver-win64\\chromedriver.exe')
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
-pages = 1000
+pages = 500
 
 # Info Lists
 prices_list = []
@@ -102,10 +102,14 @@ df = pd.DataFrame()
 df["Code"] = code_list
 df["Neighborhood"] = neighborhood_list
 df["Price"] = prices_list
+df['Price'] = df['Price'].astype(float)
 df["m²"] = m_squared_list
+df["m²"] = df["m²"].astype(float)
 df["Street"] = street_list
 df["Price/m²"] = df["Price"]/df['m²']
-df.to_csv('Data\\Webscrape_Data_Brute.csv')
+df["Neighborhood"] = df["Neighborhood"].apply(lambda x: x.strip())
+df["Price/m²"] = df["Price/m²"].apply(lambda x: round(x,2))
+df.to_csv('Data\\Webscrape_Data_Gross.csv')
 
 df_media = pd.DataFrame()
 df_media = df.groupby('Neighborhood')['Price/m²'].mean()
