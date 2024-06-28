@@ -88,16 +88,17 @@ The Streamlit app can be accessed on the link bellow:
 
 ## Step 5 - Correlation Analysis
 
-At the end of the data Visualisation link there's a correlations analysis where it's possible to identify that some variables have a relevant correlation, (mention the model and it's implications and the relationship between the variables.)
+At the end of the data visualization link, there is a correlation analysis revealing that certain variables exhibit notable correlations. In the top right corner of the matrix, we observe a correlation of 0.59 between the Historical Geometrical Center Index and the Price/m² of neighborhoods, suggesting that the index may explain variations in housing prices across the city. Similarly, a correlation of 0.6 is evident between the Recreational Geometrical Center Index and housing prices. Although correlations with population center indices are significant, they are comparatively lower than those with geometrical indices.
 
-Here's the corrected version of your text with grammar and clarity improvements:
+Furthermore, an inverse relationship appears between the School Dropout rate and the Historical Geometrical Center Index, evidenced by a correlation of -0.33.
+
 
 ## Objectives ##
 
-- Obtain the Geometrical and Population Centers of Neighborhoods and Macrozones :ballot_box_with_check:
+- Obtain the geometrical and population centers of neighborhoods and macrozones :ballot_box_with_check:
 - List historic places and parks with information about their location, area, quality, and distance in relation to the main body of water in Porto Alegre (Lake Guaíba) :ballot_box_with_check:
-- Calculate the Recreational and Historical Indices for each subdivision of the city :ballot_box_with_check:
+- Calculate the recreational and historical indices for each subdivision of the city :ballot_box_with_check:
 - Obtain socioeconomic data about wages and education levels in Porto Alegre :ballot_box_with_check:
-- Web scrape the average rent prices for housing in each subdivision of Porto Alegre :ballot_box_with_check:
+- Web scrape the average prices for housing in each subdivision of Porto Alegre :ballot_box_with_check:
 - Correlate the indices with the socioeconomic data to verify the relationships among variables :ballot_box_with_check:
 - Present the data on Streamlit :ballot_box_with_check:
