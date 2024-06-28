@@ -47,7 +47,7 @@ Parks, Museums, Memorials, and Historical-Cultural Heritage sites, as designated
 
 ## Step 3 - Computing the Gravitacional Index
 
-This index was based on Carlino & Saiz paper https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1293550. 
+This index was based on Carlino & Saiz [paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1293550). 
 The index express how much historicity or beauty is near the center of the division selected, higer the value, the more concentrated is the beaty of the division, so it's expected that beautiful neighborhoods have a high index.
 
 The index is constructed as bellow:
