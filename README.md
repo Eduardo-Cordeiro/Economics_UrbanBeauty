@@ -17,6 +17,8 @@ By acquiring the shapefiles of the Neighborhoods and Macrozones, we gain access 
 
 With this information, it's possible to compute the Area and the Center of these forms using the expressions bellow
 
+
+
 $$
 A = \frac{1}{2} \sum_{i=1}^{n-1} (x_{i}y_{i+1} - x_{i+1}y_{i})
 $$
