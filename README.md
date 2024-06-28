@@ -81,12 +81,10 @@ The quality was determined by the quality of infrastructure.
 
 ## Step 4 - Visualizing Data
 
-On the 'Streamlit' repository it's possible to visualize the Dataframes, Map and a Correlation Matrix were we can see, compare an get some insights about the Data obtained.
+On the 'Streamlit' folder the script for the app is filled. In the app it's possible to check the Macrozones and Neighborhoods complete DataFrames, an interactive map of Porto Alegre contaning the subdivisions of the city an their geometric and populational centers and the correlation matrix.
 
 The Streamlit app can be accessed on the link bellow:
-https://economicsurbanbeauty-rvgejj7wd9luepcjwnlpcv.streamlit.app/
-
-(Gnerate the webscraping for housing prices)
+[Visualize Data](https://economicsurbanbeauty-rvgejj7wd9luepcjwnlpcv.streamlit.app/)
 
 ## Step 5 - Correlation Analysis
 
