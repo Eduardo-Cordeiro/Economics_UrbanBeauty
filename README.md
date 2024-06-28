@@ -17,8 +17,6 @@ By acquiring the shapefiles of the Neighborhoods and Macrozones, we gain access 
 
 With this information, it's possible to compute the Area and the Center of these forms using the expressions bellow
 
-
-
 $$
 A = \frac{1}{2} \sum_{i=1}^{n-1} (x_{i}y_{i+1} - x_{i+1}y_{i})
 $$
@@ -39,8 +37,8 @@ where:
 - \( Cy \) is the Latitude of the center.
   
 
-#### Populacional Center
-The data for populacional density was taken from 2020 NASA GPW on [https://sedac.ciesin.columbia.edu/data/collection/gpw-v4 ] and the center of each Neighborhood and Macrozone was obtained via QGIS and then exported do a .xlsx file.
+#### Populational Center
+The data for populational density was taken from [2020 NASA GPW](https://sedac.ciesin.columbia.edu/data/collection/gpw-v4) and the center of each Neighborhood and Macrozone was obtained via QGIS and then exported to a _xlsx_ file.
 
 ## Step 2 - Obtaining coordinates of Scenic Locations 
 
