@@ -81,9 +81,9 @@ The quality was determined by the quality of infrastructure.
 
 ## Step 4 - Visualizing Data
 
-On the 'Streamlit' folder the script for the app is filled. In the app it's possible to check the Macrozones and Neighborhoods complete DataFrames, an interactive map of Porto Alegre contaning the subdivisions of the city an their geometric and populational centers and the correlation matrix.
+In the 'Streamlit' folder, you'll find the script for the app. We can view the complete DataFrames for Macrozones and Neighborhoods, an interactive map of Porto Alegre showing city subdivisions along with their geometric and population centers, and the correlation matrix.
 
-The Streamlit app can be accessed on the link bellow:
+Access the Streamlit app using the link below:
 [Visualize Data](https://economicsurbanbeauty-rvgejj7wd9luepcjwnlpcv.streamlit.app/)
 
 ## Step 5 - Correlation Analysis
