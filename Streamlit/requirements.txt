@@ -3,4 +3,3 @@ pandas
 requests
 streamlit
 seaborn
-plotly.express
