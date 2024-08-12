@@ -10,10 +10,10 @@ To accomplish this, the steps bellow must be followed:
 
 ## Step 1 - Obtaining Centers
 
-The city under study can be divided into various entities, notably 'Bairros' (Neighborhoods) and 'Macrozonas' (Macrozones), which will be central to our analysis. We have the option to utilize either the geometric center or the population center of this subdivisions. In this project, we'll explore all possibilities and determine which yields the most promising results.
+The city under study can be divided into various entities, notably 'Bairros' (Neighborhoods) and 'Macrozonas' (Macroregions), which will be central to our analysis. We have the option to utilize either the geometric center or the population center of this subdivisions. In this project, we'll explore all possibilities and determine which yields the most promising results.
 
 #### Geometric Center
-By acquiring the shapefiles of the Neighborhoods and Macrozones, we gain access to their polygons and consequently their respective vertices.
+By acquiring the shapefiles of the Neighborhoods and Macroregions, we gain access to their polygons and consequently their respective vertices.
 
 With this information, it's possible to compute the Area and the Center of these forms using the expressions bellow
 
@@ -81,7 +81,7 @@ The quality was determined by the quality of infrastructure.
 
 ## Step 4 - Visualizing Data
 
-In the 'Streamlit' folder, you'll find the script for the app. We can view the complete DataFrames for Macrozones and Neighborhoods, an interactive map of Porto Alegre showing city subdivisions along with their geometric and population centers, and the correlation matrix.
+In the 'Streamlit' folder, you'll find the script for the app. We can view the complete DataFrames for Macroregions and Neighborhoods, an interactive map of Porto Alegre showing city subdivisions along with their geometric and population centers, and the correlation matrix.
 
 Access the Streamlit app using the link below:
 [Visualize Data](https://economicsurbanbeauty-rvgejj7wd9luepcjwnlpcv.streamlit.app/)
@@ -95,7 +95,7 @@ Furthermore, an inverse relationship appears between the School Dropout rate and
 
 ## Objectives ##
 
-- Obtain the geometrical and population centers of neighborhoods and macrozones :ballot_box_with_check:
+- Obtain the geometrical and population centers of neighborhoods and macroregions :ballot_box_with_check:
 - List historic places and parks with information about their location, area, quality, and distance in relation to the main body of water in Porto Alegre (Lake Guaíba) :ballot_box_with_check:
 - Calculate the recreational and historical indices for each subdivision of the city :ballot_box_with_check:
 - Obtain socioeconomic data about wages and education levels in Porto Alegre :ballot_box_with_check:
